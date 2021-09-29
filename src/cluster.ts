@@ -1,10 +1,11 @@
 // cluster.ts
 
-import cluster from 'cluster';
+// import cluster from 'cluster';
+const cluster = require('cluster')
 import * as os from 'os';
 export class Cluster {
-    static register(workers: Number, callback: Function): void {
-        if (cluster.isPrimary) {
+    static register(workers: Number | 'auto', callback: Function): void {
+        if (cluster.isMaster) {
             console.log(`Master server started on ${process.pid}`);
 
             //ensure workers exit cleanly 
@@ -18,7 +19,7 @@ export class Cluster {
             });
 
             var cpus = os.cpus().length;
-            if (workers > cpus)
+            if (workers > cpus || workers === 'auto')
                 workers = cpus;
 
             for (let i = 0; i < workers; i++) {
