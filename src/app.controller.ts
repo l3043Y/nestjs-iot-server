@@ -13,7 +13,7 @@ export class AppController {
 
   @Post()
   savePostValue(@Req() request) {
-    console.log('rq',request.body)
+    // console.log('rq',request.body)
     this.db.collection('eMeter').insertOne(request.body, (err, result) => {
       if (err) {
         // response.status(500).json(err);

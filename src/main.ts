@@ -11,7 +11,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter()
   );
-  await app.listen(3000);
+  await app.listen(8080,'0.0.0.0');
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 
