@@ -1,0 +1,45 @@
+services:
+
+  nestjs-iot-server:
+    build: .
+    image: l3043y/nestjs-iot-server
+    depends_on: 
+      - mongo
+    # restart: always
+    ports:
+     - "8080:8080"
+
+  # iot-server:
+  #   build: .
+  #   image: l3043y/iot-server
+  #   restart: always
+  #   ports:
+  #     - 3000
+  #   environment:
+  #     IOTS_CONFIG_MONGODB_URL: mongodb://mongo:27017
+
+  # nginx:
+  #   image: nginx:latest
+  #   volumes: 
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #   depends_on:
+  #     - iot-server
+  #   ports:
+  #     - "8080:8080"
+
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - mongoDB_data:/data/db
+    ports:
+      - 27000:27017
+
+volumes:
+  mongoDB_data:
+    # external: true
+
+networks: 
+  default: 
+    # external: true
+    name: iot-server-network

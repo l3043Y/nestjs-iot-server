@@ -5,7 +5,7 @@ export const mongoDbProviders = [
   {
     provide: MONGODB_PROVIDER,
     useFactory: async () => new Promise((resolve, reject) => {
-      MongoClient.connect('mongodb://localhost:27000',
+      MongoClient.connect('mongodb://mongo:27017',
     //   { useUnifiedTopology: true },
       (error, client) => {
         if (error) {
